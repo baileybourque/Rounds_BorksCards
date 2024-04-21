@@ -10,12 +10,15 @@ using UnityEngine;
 
 namespace BorksCards.Cards
 {
-    class Template : CustomCard
+    class RocketJump : CustomCard
     {
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
             UnityEngine.Debug.Log($"[{BorksCards.ModInitials}][Card] {GetTitle()} has been setup.");
+            block.forceToAdd = -10f;
+            statModifiers.health = 1.2f;
+            block.cdAdd = 0.25f;
         }
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
@@ -29,11 +32,11 @@ namespace BorksCards.Cards
         }
         protected override string GetTitle()
         {
-            return "CardName";
+            return "Rocket Jump";
         }
         protected override string GetDescription()
         {
-            return "CardDescription";
+            return "Jump backwards when you block!";
         }
         protected override GameObject GetCardArt()
         {
@@ -50,8 +53,15 @@ namespace BorksCards.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Effect",
-                    amount = "No",
+                    stat = "Health",
+                    amount = "+20%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+               new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Block Cooldown",
+                    amount = "+0.25s",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };

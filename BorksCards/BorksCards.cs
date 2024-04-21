@@ -16,7 +16,7 @@ namespace BorksCards
     [BepInPlugin(ModId, ModName, Version)]
     // The game our mod is associated with
     [BepInProcess("Rounds.exe")]
-    public class MyModName : BaseUnityPlugin
+    public class BorksCards : BaseUnityPlugin
     {
         private const string ModId = "com.bork.rounds.borkscards";
         private const string ModName = "BorksCards";
@@ -34,7 +34,7 @@ namespace BorksCards
         void Start()
         {
             instance = this;
-            CustomCard.BuildCard<MyCardName>();
+            CustomCard.BuildCard<RocketJump>();
         }
     }
 }
